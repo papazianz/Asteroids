@@ -61,7 +61,8 @@ public class Rock extends Polygon()
     }
 
 
-    // Gets a list of all the x postions of each asteroid
+    // Gets a list of all the x postions of each asteroid by 
+    // cloning the orginal list, and adding the asteroids starting postion
     public static int[] getPolyXArray(int randomStartXPos)
     {
         int[] tempPolyXArray = (int[])sPolyXArray.clone();
@@ -75,8 +76,9 @@ public class Rock extends Polygon()
         
     }
 
-    
-    // Gets a list of all the y postions of each asteroid
+
+    // Gets a list of all the y postions of each asteroid by 
+    // cloning the orginal list, and adding the asteroids starting postion
     public static int[] getPolyYArray(int randomStartYPos)
     {
         int[] tempPolyYArray = (int[])sPolyYArray.clone();
