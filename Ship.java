@@ -12,8 +12,10 @@ public class Ship extends Polygon
    int height = GameBoard.boardHeight;
    
    
-   public static int[] shipXArray = {500,527,500,508,500};
-   public static int[] shipYArray = {400,415,430,415,400};
+   public static int[] shipXArray = {-13,14,-13,-5,-13};
+   public static int[] shipYArray = {-15,0,15,0,-15};
+   
+   public static int rotationAngle = 0;
 
    public Ship()
    {
