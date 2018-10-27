@@ -1,4 +1,6 @@
 import java.awt.Polygon;
+import java.awt.Rectangle;
+import java.util.Arraylist;
 
 public class Rock extends Polygon
 {
@@ -36,6 +38,12 @@ public class Rock extends Polygon
    
    
    }
+   
+ 
+    public Rectangle setBounds()
+    {
+    return new Rectangle(super.xpoints[0], super.ypoints[0], rockWidth, rockHeight);
+    }
 
    public void move() 
    {
