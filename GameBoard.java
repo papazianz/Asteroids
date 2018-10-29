@@ -132,7 +132,7 @@ public class GameBoard extends JFrame
       // Draws 50 rocks on game board and stores them in ArrayList<Rock>
       public DrawingPanel()
       {
-         for(int i = 0; i < 50; i++)
+         for(int i = 0; i < 20; i++)
          {
             // Gives each rock a different starting postion
             int randomStartXPos = (int) (Math.random() * (GameBoard.boardWidth - 45) + 1);
@@ -140,6 +140,8 @@ public class GameBoard extends JFrame
          
             rocks.add(new Rock(Rock.getRockXArray( randomStartXPos), 
                    Rock.getRockYArray(randomStartYPos), 13, randomStartXPos, randomStartYPos));
+            Rock.rocks = rocks;
+         
          }
       
       }
