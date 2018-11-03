@@ -183,7 +183,7 @@ public class Ship extends Polygon{
 	// Sets rectangle around the ship to manage its collision with rocks
    public Rectangle setBounds(){
    	
-      return new Rectangle(getShipWidth() - 14, getShipHeight() - 15, getShipWidth(), getShipHeight());
+      return new Rectangle((int) getXCenter() - 16, (int) getYCenter() - 16, getShipWidth(), getShipHeight());
    	
    }
    
