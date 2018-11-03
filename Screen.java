@@ -11,13 +11,16 @@ import javax.swing.JFrame;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.geom.AffineTransform;
+import javax.sound.sampled.*;
+import java.io.IOException;
+import java.net.*;
+import javax.swing.*;
 
 
 
 
 public class Screen extends JFrame
 {
-   // Width and height of the game board
    public static int screenHeight = 800;
    public static int screenWidth = 1200;
    static Ship battleShip = new Ship();
@@ -25,7 +28,8 @@ public class Screen extends JFrame
    public static int keyHeldCode;
    public static ArrayList<Railgun> railguns = new ArrayList<Railgun>();
 
-
+   String laserSound = "file:C:/Users/N/Documents/jgrasp/Asteroids/sounds/laser.WAV";
+   String music = "file:C:/Users/N/Documents/jgrasp/Asteroids/sounds/music.WAV";
 
    public static void main(String [] args)
    {
@@ -41,6 +45,7 @@ public class Screen extends JFrame
    
       DrawingPanel gamePanel = new DrawingPanel();
    
+      playSound(music);
       // Fits the drawing to the whole screen
       this.add(gamePanel, BorderLayout.CENTER);
       
@@ -85,6 +90,8 @@ public class Screen extends JFrame
                }
                else if (e.getKeyCode()==KeyEvent.VK_ENTER){
                   System.out.println("Shoot");
+                  
+                  playSound(laserSound);
                
                // Creates a new railgun and passes the ships nose position
                // so the railgun can start there. Also passes the ships
@@ -93,12 +100,7 @@ public class Screen extends JFrame
                   railguns.add(new Railgun(battleShip.getShipTipX(),
                      battleShip.getShipTipY(), 
                      battleShip.getSittingAngle()));
-                  railguns.add(new Railgun(battleShip.getShipTipX(),
-                     battleShip.getShipTipY(), 
-                     battleShip.getSittingAngle()));
-                  railguns.add(new Railgun(battleShip.getShipTipX(),
-                     battleShip.getShipTipY(), 
-                     battleShip.getSittingAngle()));
+               
                
                   System.out.println("SittingAngle " + battleShip.getSittingAngle());
                   System.out.println(railguns.size());
@@ -119,6 +121,51 @@ public class Screen extends JFrame
       // Sets the delay of when to redraw the board
       executor.scheduleAtFixedRate(new RedrawScreen(this), 0L, 20L, TimeUnit.MILLISECONDS);
       this.setVisible(true);
+   
+   }
+   
+
+   public static void playSound(String sound)
+   {
+      URL fileLocation;
+      try {
+         fileLocation = new URL(sound);
+       
+        	    // Stores a predefined audio clip
+         Clip clip = null;
+      		
+      		// Convert audio data to different playable formats
+         clip = AudioSystem.getClip();
+      		
+      		// Holds a stream of a definite length
+         AudioInputStream inputStream;
+      
+         inputStream = AudioSystem.getAudioInputStream(fileLocation);
+      
+      		// Make audio clip available for play
+         clip.open( inputStream );
+      			
+      		// Define how many times to loop
+         clip.loop(0);
+      		
+      		// Play the clip
+         clip.start();
+      }
+      catch (MalformedURLException e1) {
+      			// TODO Auto-generated catch block
+         e1.printStackTrace();
+      }
+        	    
+      catch (UnsupportedAudioFileException | IOException e1) {
+      			// TODO Auto-generated catch block
+         e1.printStackTrace();
+      }
+        	    
+      catch (LineUnavailableException e1) {
+      			// TODO Auto-generated catch block
+         e1.printStackTrace();
+      }
+   	
    
    }
 
@@ -186,8 +233,11 @@ public class Screen extends JFrame
          //Draws and moves each asteroid on gameboard
          for (Asteroid asteroid : asteroids)
          {
-            asteroid.move();
-            graphicSettings.draw(asteroid);
+            if(asteroid.onScreen)
+            {
+               asteroid.move(battleShip, Screen.railguns);
+               graphicSettings.draw(asteroid);
+            }
          }
          
          
@@ -204,8 +254,8 @@ public class Screen extends JFrame
          else if(Screen.keyHeld == true && Screen.keyHeldCode == 87)
          {
             battleShip.setFlyingAngle(battleShip.getSittingAngle());
-            battleShip.increaseXVelocity(battleShip.shipXFlyingAngle(battleShip.getFlyingAngle())*0.1);
-            battleShip.increaseYVelocity(battleShip.shipYFlyingAngle(battleShip.getFlyingAngle())*0.1);
+            battleShip.increaseXVelocity(battleShip.shipXFlyingAngle(battleShip.getFlyingAngle())*0.2);
+            battleShip.increaseYVelocity(battleShip.shipYFlyingAngle(battleShip.getFlyingAngle())*0.2);
          }
          
       
