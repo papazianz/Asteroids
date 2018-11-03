@@ -12,6 +12,8 @@ public class Asteroid extends Polygon
    int asteroidHeight = 31;
    int width = Screen.screenWidth;
    int height = Screen.screenHeight;
+   public boolean onScreen = true;
+
    
    // x and y cordinates for the location of each asteriod
    int[] asteroidXPoints, asteroidYPoints;
@@ -44,28 +46,67 @@ public class Asteroid extends Polygon
 
 
 
-   public void move() 
+   public void move(Ship battleShip, ArrayList<Railgun> railguns) 
    {
       //Sets a rectangle around a asteroid to use a base to check against
       Rectangle baseAsteroid = this.setBounds();
       
       for(Asteroid asteroid: asteroids)
       {
-       //Creats a rectangle around the rest of the asteroids
-         Rectangle otherAsteroid = asteroid.setBounds();
+      
+         if (asteroid.onScreen)
+         {
+         
+         
+         //Creats a rectangle around the rest of the asteroids
+            Rectangle otherAsteroid = asteroid.setBounds();
          
          
          // Checks asteroids against each other
-         if(asteroid != this && otherAsteroid.intersects(baseAsteroid))
-         {
-            int tempX = this.xDirection;
-            int tempY = this.yDirection;
-         
-            this.xDirection = asteroid.xDirection;
-            this.yDirection = asteroid.yDirection;
-         
-            asteroid.xDirection = tempX;
-            asteroid.yDirection = tempY;
+            if(asteroid != this && otherAsteroid.intersects(baseAsteroid))
+            {
+               int tempX = this.xDirection;
+               int tempY = this.yDirection;
+            
+               this.xDirection = asteroid.xDirection;
+               this.yDirection = asteroid.yDirection;
+            
+               asteroid.xDirection = tempX;
+               asteroid.yDirection = tempY;
+            }
+            
+            Rectangle shipBox = battleShip.setBounds();
+            
+            if (otherAsteroid.intersects(shipBox))
+            {
+               battleShip.setXCenter(battleShip.screenW/2);
+               battleShip.setYCenter(battleShip.screenH/2);
+               
+               battleShip.setXVelocity(0);
+               battleShip.setYVelocity(0);
+            }
+            for(Railgun railgun : railguns){
+            	
+            	// Make sure the Torpedo is on the screen
+            	
+               if(railgun.onScreen){
+               
+               	// NEW Check if a torpedo hits a Rock
+               	
+                  if(otherAsteroid.contains(railgun.getXCenter(),railgun.getYCenter())){
+                  	
+                     asteroid.onScreen = false;
+                     railgun.onScreen = false;
+                  	
+                     System.out.println("HIT");
+                  	
+                  	// NEW play explosion sound if rock is destroyed
+                  	
+                  }
+               
+               }
+            	
+            }
          
          }
       }
