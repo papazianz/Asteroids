@@ -1,45 +1,24 @@
 import java.awt.Polygon;
 import java.awt.Rectangle;
 
-public class Railgun extends Polygon{
-	
-	
-	// Get the board width and height
-
+public class Railgun extends Polygon
+{
    int screenW = Screen.screenWidth;
    int screenH = Screen.screenHeight;
-		
-	// Center of railgun
-		
+
    private double xCenter = 0, yCenter = 0;
-		
-	// Will hold the x & y coordinates for the railgun
-	// Everything is based on coordinates from the center
-		
+
    public static int[] railgunXPoints = {-3,3,3,-3,-3};
    public static int[] railgunYPoints = {-3,-3,3,3,-3};
-	
-	// Width and height of railgun
-	
    private int railgunWidth = 6, railgunHeight = 6;
-	
-	// Keep track of whether railgun is on screen
-	
    public boolean onScreen = false;
-	
-	// The angle the railgun moves on the screen
-	
    private double flyingAngle = 0;
-	
-	// Determines how quickly the railgun moves on 
-	// its assigned path
-	
    private double xVelocity = 5, yVelocity = 5;
 	
-   public Railgun(double xCenter, double yCenter, double flyingAngle){
+   public Railgun(double xCenter, double yCenter, double flyingAngle)
+   {
    	
-   	// Creates a Polygon by calling the super or parent class Polygon
-   	
+   	// Creates a Polygon by calling the super or parent class Polygon	
       super(railgunXPoints, railgunYPoints, 5);
    	
    	// Defines the center based on the vectors of
@@ -91,24 +70,32 @@ public class Railgun extends Polygon{
 	
 	// Gets & sets the x & y for upper left hand corner of ship
 	
-   public int getWidth(){ 
-      return railgunWidth; }
-			
-   public int getHeight(){ 
-      return railgunHeight; }
+   public int getWidth()
+   { 
+      return railgunWidth; 
+   }
+   public int getHeight()
+   { 
+      return railgunHeight; 
+   }
 	
 	// Set and increase the railgun movement angle
 	
-   public void setFlyingAngle(double flyingAngle){ this.flyingAngle = flyingAngle; }
+   public void setFlyingAngle(double flyingAngle)
+   {
+      this.flyingAngle = flyingAngle;
+   }
 		
-   public double getFlyingAngle(){ 
-      return flyingAngle; }
+   public double getFlyingAngle()
+   { 
+      return flyingAngle; 
+   }
 	
 	// Artificial rectangle that is used for collision detection
 	
-   public Rectangle getBounds(){
-   		
-      return new Rectangle(getWidth() - 6, getHeight() - 6, getWidth(), getHeight());
+   public Rectangle setBounds()
+   {
+      return new Rectangle((int) getXCenter() - 6, (int) getYCenter() - 6, getWidth(), getHeight());
    		
    }
 	
