@@ -7,7 +7,7 @@ import java.util.ArrayList;
 * Contains the asteroids properties, extending the Polygon class.
 *
 * @author Nick Papazian
-* @since 9/20/2018
+* @since 10/2/2018
 **/
 public class Asteroid extends Polygon
 {
