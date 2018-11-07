@@ -32,9 +32,6 @@ public class Asteroid extends Polygon
    public static int[] sAsteroidXPoints = {10, 17, 26, 34, 27, 36, 26, 14, 8, 1, 5, 1, 10},
       sAsteroidYPoints = {0, 5, 1, 8, 13, 20, 31, 28, 31, 22, 16, 7, 0};
 
-   
-
-
    /** 
    * Constructs the asteroid by calling the Polygon constructor via super().
    * Also sets starting positions.
@@ -49,7 +46,6 @@ public class Asteroid extends Polygon
    {
       super(asteroidXPoints, asteroidYPoints, pointInPoly);
       
-   
       // Moves the asteroid in a random direction
       this.xDirection = (int) (Math.random() * 4 + 1);
       this.yDirection = (int) (Math.random() * 4 + 1);
@@ -121,15 +117,11 @@ public class Asteroid extends Polygon
       
       for (Asteroid asteroid: asteroids)
       {
-      
          if (asteroid.getOnScreen())
          {
-         
-         
          //Creates a rectangle around the rest of the asteroids
             Rectangle otherAsteroid = asteroid.setBounds();
-         
-         
+            
          // Checks asteroids against each other
             if (asteroid != this && otherAsteroid.intersects(baseAsteroid))
             {
