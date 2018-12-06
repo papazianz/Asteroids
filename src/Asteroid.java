@@ -26,10 +26,10 @@ public class Asteroid extends Polygon
    private int[] asteroidXPoints, asteroidYPoints;
    
    /** An Arraylist that hold all of the asteroid objects. **/
-   public static ArrayList<Asteroid> asteroids = new ArrayList<Asteroid>();
+   protected static ArrayList<Asteroid> asteroids = new ArrayList<Asteroid>();
 
    /** Array's that hold all of the starting coordinates for the asteroids. **/
-   public static int[] sAsteroidXPoints = {10, 17, 26, 34, 27, 36, 26, 14, 8, 1, 5, 1, 10},
+   protected static int[] sAsteroidXPoints = {10, 17, 26, 34, 27, 36, 26, 14, 8, 1, 5, 1, 10},
       sAsteroidYPoints = {0, 5, 1, 8, 13, 20, 31, 28, 31, 22, 16, 7, 0};
 
    /** 
