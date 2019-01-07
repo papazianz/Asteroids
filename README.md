@@ -1,4 +1,4 @@
-# Basic clone of the classic arcade game, Asteroids.  
+# Basic clone of the classic arcade game Asteroids.  
 
 ![alt text][screenshot]
 
