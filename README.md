@@ -1,9 +1,11 @@
-# Basic clone of the classic arcade game Asteroids.  
+# Asteriods  
+
+
 
 ![alt text][screenshot]
 
 
-Movment Controls: W, S, A, D
+Movment Controls: W, A, S, D
 
 Fire Railgun: Enter
 
