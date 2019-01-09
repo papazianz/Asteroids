@@ -11,4 +11,4 @@ Fire Railgun: Enter
 
 The game is runnable via Asteriods-java.jar
 
-[screenshot]:https://imgur.com/NvM2V5W
+[screenshot]:https://i.imgur.com/NvM2V5W.png
