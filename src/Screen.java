@@ -8,6 +8,9 @@ import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.geom.AffineTransform;
@@ -26,7 +29,7 @@ import javax.swing.*;
 public class Screen extends JFrame
 {
    /** Holds the Screens height and width. **/
-   private static int screenHeight = 1000, screenWidth = 1200;
+   private static int screenHeight = 800, screenWidth = 1200;
 
    /** Creates the ship that will be referenced. **/
    private static Ship battleShip = new Ship();
@@ -39,6 +42,10 @@ public class Screen extends JFrame
    
    /** Holds each railgun bullet shot. **/
    private static ArrayList<Railgun> railguns = new ArrayList<Railgun>();
+   
+   protected static int scoreCount = 0;
+   protected static  JLabel score;
+   protected static  JLabel asteroidCounter;
 
    private String laserSound = 
       "file:C:/Users/N/Documents/jgrasp/Asteroids/sounds/laser.WAV";
@@ -150,8 +157,31 @@ public class Screen extends JFrame
       executor.scheduleAtFixedRate(new RedrawScreen(this), 
          0L, 20L, TimeUnit.MILLISECONDS);
       this.setVisible(true);
+      
+      // Displays the score
+      score = new JLabel();
+      score.setFont(new Font("TimesRoman", Font.PLAIN, 15));
+      score.setForeground(Color.WHITE);
+      score.setText("Score: " + scoreCount);
+      
+      asteroidCounter = new JLabel();
+      asteroidCounter.setFont(new Font("TimesRoman", Font.PLAIN, 15));
+      asteroidCounter.setForeground(Color.WHITE);
+      asteroidCounter.setText("Asteroids Remaining: " + Asteroid.asteriodCount);
+   
+      
+      JPanel scorePanel = new JPanel(new BorderLayout());
+      scorePanel.setBackground(Color.BLACK);
+      scorePanel.add(score, BorderLayout.WEST);
+      scorePanel.add(asteroidCounter, BorderLayout.EAST);
+      this.add(scorePanel, BorderLayout.NORTH);
+   
+              
+      
+      
    
    }
+
    
    /** Plays a sound from the file provided.
    * @param sound 
@@ -220,11 +250,11 @@ public class Screen extends JFrame
       private int width = Screen.getScreenWidth();
       private int height = Screen.getScreenHeight();
    
-      // Draws 50 asteroids on game board and stores them in ArrayList<Asteroid>
+      // Draws 20 asteroids on game board and stores them in ArrayList<Asteroid>
       DrawingPanel()
       {
          int count = 0;
-         while (count < 30)
+         while (count < 20)
          {
             // Gives each asteroid a different starting position
             int randomStartXPos = (int) (Math.random()
@@ -302,7 +332,6 @@ public class Screen extends JFrame
          graphicSettings.translate(getShip().getXCenter(),
             getShip().getYCenter());
          graphicSettings.rotate(Math.toRadians(getShip().getSittingAngle()));
-      
       
       
          graphicSettings.draw(getShip());
