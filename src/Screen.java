@@ -101,8 +101,6 @@ public class Screen extends JFrame
              // TODO Auto-generated method stub
              
              }
-          
-          
              @Override
              public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == 87)
@@ -139,9 +137,7 @@ public class Screen extends JFrame
                    System.out.println("SittingAngle " 
                         + getShip().getSittingAngle());
                    System.out.println("Bullets Fired: " + railguns.size());
-                
                 }
-             
              }
           
              @Override
@@ -158,7 +154,7 @@ public class Screen extends JFrame
          0L, 20L, TimeUnit.MILLISECONDS);
       this.setVisible(true);
       
-      // Displays the score
+      // Displays the score and number of Asteroids left
       score = new JLabel();
       score.setFont(new Font("TimesRoman", Font.PLAIN, 15));
       score.setForeground(Color.WHITE);
@@ -168,18 +164,12 @@ public class Screen extends JFrame
       asteroidCounter.setFont(new Font("TimesRoman", Font.PLAIN, 15));
       asteroidCounter.setForeground(Color.WHITE);
       asteroidCounter.setText("Asteroids Remaining: " + Asteroid.asteriodCount);
-   
-      
+
       JPanel scorePanel = new JPanel(new BorderLayout());
       scorePanel.setBackground(Color.BLACK);
       scorePanel.add(score, BorderLayout.WEST);
       scorePanel.add(asteroidCounter, BorderLayout.EAST);
       this.add(scorePanel, BorderLayout.NORTH);
-   
-              
-      
-      
-   
    }
 
    
