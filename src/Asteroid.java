@@ -7,7 +7,7 @@ import java.util.ArrayList;
 * Contains the asteroids properties, extending the Polygon class.
 *
 * @author Nick Papazian
-* @since 10/2/2018
+* @since 9/20/2018
 **/
 public class Asteroid extends Polygon
 {
@@ -18,6 +18,7 @@ public class Asteroid extends Polygon
    private int asteroidHeight = 31;
    private int width = Screen.getScreenWidth();
    private int height = Screen.getScreenHeight();
+   protected static int asteriodCount = 20;
    
    /** Monitors if the reference object is on the screen. **/
    private boolean onScreen = true;   
@@ -26,11 +27,14 @@ public class Asteroid extends Polygon
    private int[] asteroidXPoints, asteroidYPoints;
    
    /** An Arraylist that hold all of the asteroid objects. **/
-   protected static ArrayList<Asteroid> asteroids = new ArrayList<Asteroid>();
+   public static ArrayList<Asteroid> asteroids = new ArrayList<Asteroid>();
 
    /** Array's that hold all of the starting coordinates for the asteroids. **/
-   protected static int[] sAsteroidXPoints = {10, 17, 26, 34, 27, 36, 26, 14, 8, 1, 5, 1, 10},
+   public static int[] sAsteroidXPoints = {10, 17, 26, 34, 27, 36, 26, 14, 8, 1, 5, 1, 10},
       sAsteroidYPoints = {0, 5, 1, 8, 13, 20, 31, 28, 31, 22, 16, 7, 0};
+
+   
+
 
    /** 
    * Constructs the asteroid by calling the Polygon constructor via super().
@@ -46,6 +50,7 @@ public class Asteroid extends Polygon
    {
       super(asteroidXPoints, asteroidYPoints, pointInPoly);
       
+   
       // Moves the asteroid in a random direction
       this.xDirection = (int) (Math.random() * 4 + 1);
       this.yDirection = (int) (Math.random() * 4 + 1);
@@ -62,7 +67,7 @@ public class Asteroid extends Polygon
    public Rectangle setBounds()
    {
       return new Rectangle(super.xpoints[0], super.ypoints[0], 
-            asteroidWidth, asteroidHeight);
+            asteroidWidth + 2, asteroidHeight + 2);
    }
 
    /**
@@ -117,11 +122,15 @@ public class Asteroid extends Polygon
       
       for (Asteroid asteroid: asteroids)
       {
+      
          if (asteroid.getOnScreen())
          {
+         
+         
          //Creates a rectangle around the rest of the asteroids
             Rectangle otherAsteroid = asteroid.setBounds();
-            
+         
+         
          // Checks asteroids against each other
             if (asteroid != this && otherAsteroid.intersects(baseAsteroid))
             {
@@ -144,6 +153,8 @@ public class Asteroid extends Polygon
                
                Screen.getShip().setXVelocity(0);
                Screen.getShip().setYVelocity(0);
+               Screen.scoreCount = 0;
+               Screen.score.setText("Score: " + Screen.scoreCount);
             }
             for (Railgun railgun : railguns)
             {
@@ -155,7 +166,12 @@ public class Asteroid extends Polygon
                   {
                      asteroid.setOnScreen(false);
                      railgun.setOnScreen(false);
+                     Screen.scoreCount += 10; 
+                     Screen.score.setText("Score: " + Screen.scoreCount);
                      System.out.println("HIT"); 
+                     
+                     Asteroid.asteriodCount -= 1;
+                     Screen.asteroidCounter.setText("Asteroids Remaining: " + Asteroid.asteriodCount);
                   }
                }  
             }
