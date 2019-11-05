@@ -9,13 +9,13 @@ import java.util.ArrayList;
 * @author Nick Papazian
 * @since 9/20/2018
 **/
-public class Asteroid extends Polygon
+public class BigRock extends Polygon
 {
-   private int asteroidULXPos, asteroidULYPos;
-   private int xDirection = 1;
-   private int yDirection = 1;
-   private int asteroidWidth = 26;
-   private int asteroidHeight = 31;
+   public int asteroid_PLL, asteroid_PY;
+   private int x_d = 1;
+   private int y_d = 1;
+   private int asteroid_W = 26;
+   private int asteroid_H = 31;
    private int width = Screen.getScreenWidth();
    private int height = Screen.getScreenHeight();
    protected static int asteriodCount = 20;
@@ -52,12 +52,12 @@ public class Asteroid extends Polygon
       
    
       // Moves the asteroid in a random direction
-      this.xDirection = (int) (Math.random() * 4 + 1);
-      this.yDirection = (int) (Math.random() * 4 + 1);
+      this.x_d = (int) (Math.random() * 4 + 1);
+      this.y_d = (int) (Math.random() * 4 + 1);
    
       // Sets starting point for asteroid
-      this.asteroidULXPos = randomStartXPos;
-      this.asteroidULYPos = randomStartYPos;
+      this.asteroid_PLL = randomStartXPos;
+      this.asteroid_PY = randomStartYPos;
    }
    
    /** 
@@ -134,14 +134,14 @@ public class Asteroid extends Polygon
          // Checks asteroids against each other
             if (asteroid != this && otherAsteroid.intersects(baseAsteroid))
             {
-               int tempX = this.xDirection;
-               int tempY = this.yDirection;
+               int tempX = this.x_d;
+               int tempY = this.y_d;
             
-               this.xDirection = asteroid.xDirection;
-               this.yDirection = asteroid.yDirection;
+               this.x_d = asteroid.x_d;
+               this.y_d = asteroid.y_d;
             
-               asteroid.xDirection = tempX;
-               asteroid.yDirection = tempY;
+               asteroid.x_d = tempX;
+               asteroid.y_d = tempY;
             }
             
             Rectangle shipBox = Screen.getShip().setBounds();
@@ -179,25 +179,25 @@ public class Asteroid extends Polygon
       }
    
       // Places the coordinates of each asteroid in the array of polygon coordinates
-      int asteroidULXPos = super.xpoints[0];
-      int asteroidULYPos = super.ypoints[0];
+      int asteroid_PLL = super.xpoints[0];
+      int asteroid_PY = super.ypoints[0];
    
       // reverses the direction of asteroid as it hits the edge 
-      if (asteroidULXPos < 0 || (asteroidULXPos + 35 > width))
+      if (asteroid_PLL < 0 || (asteroid_PLL + 35 > width))
       {
-         xDirection = -xDirection;
+         x_d = -x_d;
       }
-      if (asteroidULYPos < 0 || (asteroidULYPos + 50 > height))
+      if (asteroid_PY < 0 || (asteroid_PY + 50 > height))
       {
-         yDirection = -yDirection;
+         y_d = -y_d;
       }
    
       // Constantly moves the asteroids by adding 
       // the random direction to the x and y coordinates
       for (int i = 0; i < super.xpoints.length; i++)
       {
-         super.xpoints[i] += xDirection;
-         super.ypoints[i] += yDirection;
+         super.xpoints[i] += x_d;
+         super.ypoints[i] += y_d;
       }          
    }
 
